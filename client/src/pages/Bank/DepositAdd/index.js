@@ -35,18 +35,12 @@ const useRowStyles = makeStyles({
     },
   });
   
-  function createData(name, calories, fat, carbs, protein, price) {
+  function createData(name,interest_rate,note,qualification) {
     return {
       name,
-      calories,
-      fat,
-      carbs,
-      protein,
-      price,
-      history: [
-        { date: '2020-01-05', customerId: '11091700', amount: 3 },
-        { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
-      ],
+      interest_rate,
+      note,
+      qualification,
     };
   }
   
@@ -66,10 +60,8 @@ const useRowStyles = makeStyles({
           <TableCell component="th" scope="row">
             {row.name}
           </TableCell>
-          <TableCell align="right">{row.calories}</TableCell>
-          <TableCell align="right">{row.fat}</TableCell>
-          <TableCell align="right">{row.carbs}</TableCell>
-          <TableCell align="right">{row.protein}</TableCell>
+          <TableCell align="right">{row.interest_rate}</TableCell>
+          <TableCell align="right">{row.note}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -264,7 +256,7 @@ export default function DepositAdd() {
     <div className="row py-3 justify-content-center">
       <div className="account-card shadow justify-content-center col-md-12 bg-white">
                     <div className="text-center" onClick={handleOpen}>
-                    <i class="fas fa-plus"></i> 
+                    <i className="fas fa-plus"></i> 
                       
                     </div>
       <Modal

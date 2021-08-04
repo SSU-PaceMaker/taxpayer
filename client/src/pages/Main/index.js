@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Link, withRouter} from 'react-router-dom';
 import MainHeader from '../../components/Navigation/MainHeader';
 import Footer from '../../components/Footer';
+import Account from '../Bank/BankComponents/Account';
 
 class Main extends Component{
     componentWillMount(){
@@ -46,6 +46,7 @@ return(
 					<div className="col-md-7 d-none d-lg-block bg-tax-main">
 						   
 					</div>
+
 				</div>
 			</div>
      
@@ -54,10 +55,11 @@ return(
 <div className="bg-white py-4">
 			<div className="container">
 				<div className="row justify-content-center">
-					<div className="col-md-7 text-gray-900">
+					<div className="col-md-6 text-gray-900">
 
-
+<Account   user="홍길동" balance="10000"/>
                         </div>
+						<div className="col-md-1"></div>
 						
 					<div className="col-md-5 text-gray-900">
                         <div className="py-3"></div>
@@ -68,21 +70,19 @@ return(
 
 						   
 					</div>
+
 				</div>
+				<Footer />
+
 			</div>
-     
-</div>
-<Footer></Footer>
-
-</div>
 
 
-    
-);
+</div></div>
+		);
 
-}
+	}
 
 
 }
 
-export default withRouter(Main);
+export default Main;

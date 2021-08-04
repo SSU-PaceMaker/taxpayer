@@ -19,32 +19,31 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const user_list = [{name: "배미혜"},{name: "김승주"},{name: "박은정"}, {name: "배미혜"}]
+//const user_list = [{name: "배미혜"},{name: "김승주"},{name: "박은정"}, {name: "배미혜"}]
 
 // class에서 student_list 받아오기
 
-
 function NumberFormatCustom(props) {
-    const { inputRef, onChange, ...other } = props;
-  
-    return (
-      <NumberFormat
-        {...other}
-        getInputRef={inputRef}
-        onValueChange={(values) => {
-          onChange({
-            target: {
-              name: props.name,
-              value: values.value,
-            },
-          });
-        }}
-        thousandSeparator
-        isNumericString
-        prefix="$ "
-      />
-    );
-  }
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat 
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      isNumericString
+      prefix="$ "
+    />
+  );
+} 
 
 class Transfer extends Component {
 
@@ -55,7 +54,7 @@ render(){
         <Autocomplete className="py-3"
         style={{useStyles}}
         id="transfer_target"
-        options={user_list}
+        options={this.props.user_list}
         variant="outlined"
         getOptionLabel={(option) => option.name}
         required

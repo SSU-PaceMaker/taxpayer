@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, useState,useEffect } from 'react';
+import axios from "axios";
+
 import Sidebar from '../../../components/Navigation/Sidebar'
 import Topbar from '../../../components/Navigation/Topbar';
 import Footer from '../../../components/Footer'
 import PageHeading from '../../../components/PageHeading';
 import LogoutModal from '../../../components/Modal/Logout'
 import ScrollToTop from '../../../components/Scroll';
-import DepositCloseModal from '../../../components/Modal/DepositCloseModal/depositCloseModal';
 import Account from '../BankComponents/Account';
-import Modal from 'react-modal';
-import ReactDOM from 'react-dom';
+
 import Deposit from '../BankComponents/Deposit';
 import DepositAdd from '../DepositAdd';
 
@@ -27,7 +27,34 @@ const customStyles = {
  
 
     
-function Bank () {
+export default function Bank () {
+
+  const [users, setUsers] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        // 요청이 시작 할 때에는 error 와 users 를 초기화하고
+        setError(null);
+        setUsers(null);
+        // loading 상태를 true 로 바꿉니다.
+        setLoading(true);
+        const response = await axios.get(
+          '/api/classes/:classId/bank'
+        );
+        setUsers(response.data); // 데이터는 response.data 안에 들어있습니다.
+      } catch (e) {
+        setError(e);
+      }
+      setLoading(false);
+    };
+
+    fetchUsers();
+  }, []);
+
+  
 
 const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -43,7 +70,11 @@ const [modalIsOpen, setIsOpen] = React.useState(false);
   function closeModal(props) {
     setIsOpen(false);
   }
-
+  if (loading) return <div>로딩중..</div>;
+  if (error) return <div>에러가 발생했습니다</div>;
+  if (!users) return null;
+  
+  
 
   return(
 
@@ -64,17 +95,20 @@ const [modalIsOpen, setIsOpen] = React.useState(false);
                     {/* <!-- Topbar --> */}
                     <Topbar />
                     {/* <!-- End of Topbar --> */}
-
                     {/* <!-- Begin Page Content --> */}
                     <div className="container-fluid">
 
                         {/* <!-- Page Heading --> */}
+                        <PageHeading title="은행"></PageHeading>
 
                         <div className="row">
                             <div className="col-lg-6 justify-content-center">
-                            <Account
+
+                              
+                            <Account onClick={alert(users[0])}
                             user="홍길동"
-                            balance="10000"/>
+                            balance="10000"
+                            user_list={users}/>
     
                             <Deposit 
                             balance="10000"
@@ -118,14 +152,8 @@ const [modalIsOpen, setIsOpen] = React.useState(false);
 
         </div>
 
-
-
-
-
-
-
   )
 
 }
 
-    export default Bank;
+ 
