@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link, withRouter} from 'react-router-dom';
 import MainHeader from '../../components/Navigation/MainHeader';
 import Footer from '../../components/Footer';
 import Account from '../Bank/BankComponents/Account';
@@ -46,7 +47,6 @@ return(
 					<div className="col-md-7 d-none d-lg-block bg-tax-main">
 						   
 					</div>
-
 				</div>
 			</div>
      
@@ -70,19 +70,18 @@ return(
 
 						   
 					</div>
-
 				</div>
-				<Footer />
-
 			</div>
+     
+</div>
+<Footer></Footer>
 
-
-</div></div>
+</div>
 		);
 
-	}
+}
 
 
 }
 
-export default Main;
+export default withRouter(Main);

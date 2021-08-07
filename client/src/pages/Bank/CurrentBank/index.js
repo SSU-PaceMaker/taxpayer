@@ -4,13 +4,12 @@ import axios from "axios";
 import Sidebar from '../../../components/Navigation/Sidebar'
 import Topbar from '../../../components/Navigation/Topbar';
 import Footer from '../../../components/Footer'
-import PageHeading from '../../../components/PageHeading';
 import LogoutModal from '../../../components/Modal/Logout'
 import ScrollToTop from '../../../components/Scroll';
 import Account from '../BankComponents/Account';
-
 import Deposit from '../BankComponents/Deposit';
 import DepositAdd from '../DepositAdd';
+import PageHeading from "../../../components/PageHeading";
 
 
 const customStyles = {

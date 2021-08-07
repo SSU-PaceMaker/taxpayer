@@ -6,10 +6,13 @@ import ScrollToTop from "../../components/Scroll";
 import PageHeading from "../../components/PageHeading";
 import ClassListDetail from "./ClassListDetail";
 import Footer from '../../components/Footer'
+import { useSelector } from 'react-redux';
+
+
 class ClassList extends Component {
 
-  render() {
-    return (
+  render()
+{    return (
       <div>
         {/* <!-- Page Wrapper --> */}
         <div id="wrapper">
@@ -49,7 +52,9 @@ class ClassList extends Component {
         <ScrollToTop />
       </div>
     );
-  }
 }
+  }
 
-export default ClassList;
+
+
+  export default ClassList

@@ -6,13 +6,12 @@ function TradeSection(props) {
     const [selectedValue, setSelectedValue] = useState()
     const [quantity, setquantity] = useState(0)
 
-    const handleAddrTypeChange = (e) => {
+    const hadleStockChange = (e) => {
         e.preventDefault()
         if (e.target.value === 'default') {
             setSelectedValue()
         } else {
             setSelectedValue(stocks[stocks.findIndex(i => i._id == e.target.value)])
-            //console.log('handleAddrTypeChange', stocks[stocks.findIndex(i => i._id == e.target.value)])
         }
         // setData(testdata[stock[e.target.value]])
     }//(setStock[e.target.value])
@@ -40,14 +39,13 @@ function TradeSection(props) {
         e.preventDefault()
         setquantity(e.target.value)
     }
-    console.log('tradesection', stocks)
 
     return (
         <div className='row'>
+            {console.log('tradesection')}
             <div className="col-sm-6 m-2">
 
                 {selectedValue &&
-
                     <ChartLine id='stock' title={selectedValue.stockName} data={adjustData(selectedValue.prices)} />
                 }
             </div>
@@ -55,7 +53,7 @@ function TradeSection(props) {
                 {stocks ?
                     < select
                         className="form-control"
-                        onChange={e => handleAddrTypeChange(e)}>
+                        onChange={e => hadleStockChange(e)}>
                         <option key='default' value='default'>선택해주세요</option>
                         {
                             stocks.map((stock, i) => <option key={stock._id} value={stock._id}>{stock.stockName}</option>)
@@ -67,8 +65,6 @@ function TradeSection(props) {
                 <div className="h2 mt-2 font-weight-bold text-gray-800">
                     현재가 : {selectedValue ? selectedValue['prices'][selectedValue['prices'].length - 1].value : ''}
                 </div>
-                <div className='h5 float-right'>보유 : 3주</div>
-
                 <div className='row-sm-*'>
                     <div className="input-group">
                         {/*selectedValue에 따라 바뀌면 됨 */}

@@ -1,21 +1,99 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClassCard from "./ClassCard";
-import Draft from "../../components/Editor";
-// form dialog (react metrial ui)
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Error from "../../components/Error";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+/*selectedClass구분해서 Store에저장하기 위해서
+import {selectClass} from '../../redux/_actions'; */
+function ClassListDetail() {
 
+  console.log("1_")
+  const dispatch = useDispatch();
+  const [classes, setclasses] = useState([]);
+  const [updateTime, setupdateTime] = useState("****-**-**");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const handleCardClicked = (e) => {
+    console.log(e.target, "HNANANANNAN");
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsError(false);
+      setIsLoading(true);
+      console.log("2_")
+
+      try {
+        const result = await axios.get("/api/classes");
+        //console.log(result.data.classes)
+        setclasses(result.data.classes);
+
+        console.log("5_")
+
+      } catch (error) {
+        setIsError(true);
+      }
+      setIsLoading(false);
+      
+      console.log("6_")
+
+    };
+    fetchData();
+    console.log("4_")
+
+  }, 
+  []);
+
+  let user = useSelector((state) => state.user);
+
+
+  return (
+    <div className="row">
+      {/*<!--className 추가-->*/}
+      <div className="col-lg-3">
+        <div className="card mb-4">
+          <div className="card-body">
+            {console.log(user.userData)}
+            {user.userData &&
+              (user.userData.role == 0 ? <FormDialog /> : "hello")}
+          </div>
+        </div>
+      </div>
+
+      {/* 데이터 만큼 */}
+      {isError && <Error></Error>}
+      {isLoading ? (
+        <div>로딩중</div>
+      ) : (
+        classes.map((info, i) => (
+          <ClassCard
+            key={info._id}
+            title={info.name}
+            img={info.image}
+            comment={info.comment}
+            onClick={handleCardClicked}
+            user={user.userData}
+          ></ClassCard>
+        ))
+      )}
+    </div>
+  );
+}
+
+export default ClassListDetail;
 //수정
-function FormDialog(props) {
-  const [classtitle, setclasstitle] = useState("");
-  const [classcontent, setclasscontent] = useState({});
-
+function FormDialog() {
+  const [classname, setclassname] = useState("");
+  const [classcontent, setclasscontent] = useState("");
   const [open, setOpen] = useState(false);
+  let user = useSelector((state) => state.user);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,23 +104,31 @@ function FormDialog(props) {
   };
 
   const onTitleChange = (e) => {
-    setclasstitle(e.target.value); //e.currentTarget.value
+    setclassname(e.target.value); //e.currentTarget.value
   };
-  const onContentChange = (value) => {
+  const onContentChange = (e) => {
     /*editor에서 현재 editor 값 넘겨줌 */
-    setclasscontent(value);
+    setclasscontent(e.target.value);
   };
 
   const handleSubmit = (e) => {
-    //데이터 저장
     //e.preventDefault();
-    // axios.post('/api/classes/:classId/laws',{"title":lawtitle,"content":lawcontent,"issuedate":issuedate})
-    // .then(function (response) {
-    //     console.log(response);
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // });
+    //console.log('handleSubmit',user.userData._id)
+    //데이터 저장
+    axios
+      .post("/api/classes", {
+        name: classname,
+        image:
+          "https://assets.tvo.org/prod/s3fs-public/styles/full_width_1280/public/article-thumbnails/kids%20in%20classroom.JPG?KgEyQTBORydSiHj.xIj8ROjMdJvgPW4r&itok=G4OLcZhp",
+        comment: classcontent,
+        teacher: user.userData._id,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -56,65 +142,45 @@ function FormDialog(props) {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">학급 추가</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            등록하고자 하는 학급 이름과 설정을 입력해주세요
-          </DialogContentText>
-          <div className="form-inline mb-3">
-            <label className="mr-2 my-1" htmlFor="newclasstitle">
-              클래스 이름
+        <form onSubmit={handleSubmit}>
+          <DialogContent>
+            <DialogContentText>
+              등록하고자 하는 학급 이름과 설정을 입력해주세요
+            </DialogContentText>
+
+            <div className="form-inline mb-3">
+              <label className="mr-2 my-1" htmlFor="newclassname">
+                클래스 이름
+              </label>
+              <input
+                type="text"
+                onChange={onTitleChange}
+                className="form-control"
+                id="newclassname"
+              />
+            </div>
+            <label className="mr-2 my-1" htmlFor="newclasscontent">
+              클래스 설명
             </label>
             <input
               type="text"
-              onChange={onTitleChange}
+              onChange={onContentChange}
               className="form-control"
-              id="newclasstitle"
+              id="newclasscontent"
+              required
             />
-          </div>
-          <label className="mr-2 my-1" htmlFor="newclasscontent">
-            클래스 설명
-          </label>
-          <input
-            type="text"
-            onChange={onContentChange}
-            className="form-control"
-            id="newclasscontent"
-            required
-          />
-          {/* <Draft type="create" onChange={onContentChange} /> */}
-        </DialogContent>
+          </DialogContent>
 
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            취소
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            저장
-          </Button>
-        </DialogActions>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              취소
+            </Button>
+            <Button type="submit" onClick={handleClose} color="primary">
+              저장
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );
 }
-
-function ClassListDetail() {
-  return (
-    <div className="row">
-      {/*<!--className 추가-->*/}
-      <div className="col-lg-3">
-        <div className="card mb-4">
-          <div className="card-body">{FormDialog()}</div>
-        </div>
-      </div>
-
-      {/* 데이터 만큼 */}
-      <ClassCard
-        title="햇빛반"
-        img="https://assets.tvo.org/prod/s3fs-public/styles/full_width_1280/public/article-thumbnails/kids%20in%20classroom.JPG?KgEyQTBORydSiHj.xIj8ROjMdJvgPW4r&itok=G4OLcZhp"
-        comment="햇빛반은 6-3반!"
-      ></ClassCard>
-    </div>
-  );
-}
-
-export default ClassListDetail;

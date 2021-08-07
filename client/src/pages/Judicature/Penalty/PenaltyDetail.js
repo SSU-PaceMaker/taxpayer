@@ -2,14 +2,14 @@ import React, { Component,useEffect, useState } from "react";
 import CardBasic from "../../../components/Cards/Basic"
 import TableTheme from "../../../components/Table/TableTheme"
 import axios from 'axios';
-
+import Error from "../../../components/Error";
 
 function PenaltyDetail() {
 
     const [isLoading, setIsLoading] = useState(false)
     const [columns, setColumns] = useState([])
     const [data, setData] = useState([])
-    const [err, setIsError] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -118,7 +118,7 @@ function PenaltyDetail() {
 <div className="tab-pane fade" id="penal_list" role="tabpanel" aria-labelledby="penal_list_tab">
 
     <CardBasic >
-
+    {isError && <Error></Error>}
         {isLoading ?
                     <div>loading</div> : (
                         <TableTheme

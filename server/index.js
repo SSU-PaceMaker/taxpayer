@@ -22,6 +22,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use('/api/users',require('./routes/users'));
+app.use('/api/classes',require('./routes/class'));
+
 /*주식 */
 app.use('/api/classes/:classId/stocks',require('./routes/stock'));
 /*통계청 */
@@ -32,12 +34,15 @@ app.use('/api/classes/:classId/taxes',require('./routes/tax'))
 app.use('/api/classes/:classId/laws',require('./routes/law'))
 app.get('/', (req, res) => res.send('Hello World!'))
 
+/*bank */
+
+
+
 app.get('/api/hello', (req, res) => {
   res.send("asdf")
 })
 
 app.get('/api/tax/nation', (req, res) => {
-
   res.json({
     "data": [
       [
@@ -143,7 +148,6 @@ app.get('/api/tax/nation', (req, res) => {
           field: 'sum',
         },
       ]
-
     ]
   })
 })

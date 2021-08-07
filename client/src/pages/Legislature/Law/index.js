@@ -56,7 +56,7 @@ export default function Law() {
         {/* <!-- Content Wrapper --> */}
         <div id="content-wrapper" className="d-flex flex-column">
           {/* <!-- Main Content --> */}
-          <div id="content">
+          <div id="content" >
             {/* <!-- Topbar --> */}
             <Topbar />
             {/* <!-- End of Topbar --> */}
