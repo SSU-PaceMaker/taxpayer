@@ -4,7 +4,6 @@ import Sidebar from '../../../components/Navigation/Sidebar'
 import Topbar from '../../../components/Navigation/Topbar';
 import Footer from '../../../components/Footer'
 import ScrollToTop from '../../../components/Scroll';
-import DepositCloseModal from '../../../components/Modal/DepositCloseModal/depositCloseModal';
 
 class Deposit extends Component {
 
@@ -19,7 +18,7 @@ class Deposit extends Component {
                 <div id="wrapper">
 
                     {/* <!-- Sidebar --> */}
-                    <Sidebar />
+                    <Sidebar/>
                     {/* <!-- End of Sidebar --> */}
 
                     {/* <!-- Content Wrapper --> */}
@@ -51,17 +50,7 @@ class Deposit extends Component {
 
                                             <hr />
 
-                                            <DepositCloseModal id='depositCloseModal'> <div> 해지하기</div>
-                                            </DepositCloseModal>
-                                            <div className="col-md-3"></div>
-
-
-                                        </div>
-
-                                        <TableTheme
-                                            title="예금상품"
-                                        />
-
+                                           
                                     </div>
 
                                     {/* <!-- Content Row --> */}
@@ -84,7 +73,7 @@ class Deposit extends Component {
                     {/* <!-- Scroll to Top Button--> */}
                     <ScrollToTop />
 
-                </div></div>
+                </div></div></div>
 
 
 

@@ -8,7 +8,7 @@ import LogoutModal from '../../Modal/Logout'
 
 
 
-function Topbar(props) {
+function ClassHeader(props) {
   
   const { clickMenuOpen } = props;
 
@@ -222,4 +222,4 @@ const mapStateToProps = store => ({
   toggled: store.menuState.menuOpen
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Topbar);
+export default connect(mapStateToProps, mapDispatchToProps)(ClassHeader);

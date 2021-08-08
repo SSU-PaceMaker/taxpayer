@@ -46,6 +46,7 @@ import Penalty from "./pages/Judicature/Penalty";
 import Law from "./pages/Legislature/Law";
 import Congress from "./pages/Legislature/Congress";
 import Auth from "../src/hoc/auth";
+import ClassBasic from "./components/Test/ClassBasic";
 
 const Routes = () => (
   <BrowserRouter>
@@ -105,6 +106,10 @@ const Routes = () => (
         path="/classes/:classId/personal-stats"
         component={MyStats}
       />
+
+      {/* 테스트 */}
+      <Route exact path="/classes/:classId/test" component={ClassBasic} />
+
 
       {/* ***************  사법부  ************** */}
       {/* 벌금 */}

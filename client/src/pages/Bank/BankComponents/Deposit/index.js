@@ -1,25 +1,8 @@
 import React, { useState } from 'react';
-import { Component } from 'react';
-import Transfer from '../Transfer';
 
 
-class Deposit extends React.Component{
+export default function Deposit(){
 
-    constructor(props){
-        super(props);
-      }
-
-        render(){ 
-            
-           // const [balance, setBlance] = useState(this.props.balance);
-           // const [interest, setInterest] = useState(this.props.interest);
-
-          //  const interestCalculator = () => {
-          //      setBlance(balance*(1+interest));
-          //    }
-
-            
-            
             return(
 
             <div className="row justify-content-center">    
@@ -47,6 +30,3 @@ class Deposit extends React.Component{
     }
     
     
-    }
-
-    export default Deposit;

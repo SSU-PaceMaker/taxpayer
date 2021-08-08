@@ -19,6 +19,8 @@
 @import "error.scss";
 @import "footer.scss";
 @import "forms.scss";
+
+
 .account-card{
 
     text-decoration: none;
@@ -28,39 +30,11 @@
    
 }
 
-.seperator-black{
+.seperator{
 
-height: 30px;
+height: 20px;
 width: 1px;
-background: #000;
+background: #fff;
 
 }
 
-.seperator-gray{
-
-    height: 30px;
-    width: 1px;
-    background:#6e707e;
-    
-    }
-
-    .tooltip {
-        display: inline-block;
-        font-weight: bold;
-      }
-
-      .tooltip-text {
-        display: none;
-        position: absolute;
-        max-width: 200px;
-        border: 1px solid;
-        border-radius: 5px;
-        padding: 5px;
-        font-size: 0.8em;
-        color: white;
-        background: deeppink;
-      }
-
-      .tooltip:hover .tooltip-text {
-        display: block;
-      }
