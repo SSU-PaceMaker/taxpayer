@@ -46,99 +46,126 @@ import Penalty from "./pages/Judicature/Penalty";
 import Law from "./pages/Legislature/Law";
 import Congress from "./pages/Legislature/Congress";
 import Auth from "../src/hoc/auth";
-import ClassBasic from "./components/Test/ClassBasic";
 
-const Routes = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={Auth(Main, null)} />
-      <Route exact path="/signin" component={Auth(SignIn, false)} />
-      <Route exact path="/signup" component={Auth(SignUp, false)} />
-      <Route exact path="/classes" component={Auth(ClassList,true)} />
-      <Route exact path="/classes/:classId" component={Auth(ClassMain,true)} />
-      {/* 클래스 설정 - 선생님만이 들어갈 수 있음 */}
-      <Route
-        exact
-        path="/classes/:classId/set-up/student"
-        component={StudentSetting}
-      />
-      <Route
-        exact
-        path="/classes/:classId/set-up/class"
-        component={ClassSetting}
-      />
+const Routes = () => ( <
+    BrowserRouter >
+    <
+    Switch >
+    <
+    Route exact path = "/"
+    component = { Auth(Main, null) }
+    /> <
+    Route exact path = "/signin"
+    component = { Auth(SignIn, false) }
+    /> <
+    Route exact path = "/signup"
+    component = { Auth(SignUp, false) }
+    /> <
+    Route exact path = "/classes"
+    component = { Auth(ClassList, true) }
+    /> <
+    Route exact path = "/classes/:classId"
+    component = { Auth(ClassMain, true) }
+    /> { /* 클래스 설정 - 선생님만이 들어갈 수 있음 */ } <
+    Route exact path = "/classes/:classId/set-up/student"
+    component = { StudentSetting }
+    /> <
+    Route exact path = "/classes/:classId/set-up/class"
+    component = { ClassSetting }
+    />
 
-      {/* ***************  경제  ************** */}
+    { /* ***************  경제  ************** */ }
 
-      {/*은행*/}
-      <Route exact path="/classes/:classId/bank" component={Bank} />
-      <Route exact path="/classes/:classId/bank/deposit" component={Deposit} />
+    { /*은행*/ } <
+    Route exact path = "/classes/:classId/bank"
+    component = { Bank }
+    /> <
+    Route exact path = "/classes/:classId/bank/deposit"
+    component = { Deposit }
+    />
 
-      {/* 증권 거래소 */}
-      <Route exact path="/classes/:classId/stock" component={TradeStock} />
-      <Route exact path="/classes/:classId/set-up/stock" component={SettingStock} />
-      <Route exact path='/classes/:classId/stock-account' component={AccountStock}/>
-      {/* ***************  행정부  ************** */}
-      {/* 국세청 */}
-      <Route exact path="/classes/:classId/national-tax" component={NationalTax} />
-      <Route exact path="/classes/:classId/set-up/tax" component={SettingTax} />
-      <Route exact path="/classes/:classId/tax-invoice" component={MyTax} />
+    { /* 증권 거래소 */ } <
+    Route exact path = "/classes/:classId/stock"
+    component = { TradeStock }
+    /> <
+    Route exact path = "/classes/:classId/set-up/stock"
+    component = { SettingStock }
+    /> <
+    Route exact path = '/classes/:classId/stock-account'
+    component = { AccountStock }
+    /> { /* ***************  행정부  ************** */ } { /* 국세청 */ } <
+    Route exact path = "/classes/:classId/national-tax"
+    component = { NationalTax }
+    /> <
+    Route exact path = "/classes/:classId/set-up/tax"
+    component = { SettingTax }
+    /> <
+    Route exact path = "/classes/:classId/tax-invoice"
+    component = { MyTax }
+    />
 
-      {/*법*/}
-      <Route exact path="/classes/:classId/law" component={Law} />
-      <Route exact path="/classes/:classId/lawmaking" component={Congress} />
+    { /*법*/ } <
+    Route exact path = "/classes/:classId/law"
+    component = { Law }
+    /> <
+    Route exact path = "/classes/:classId/lawmaking"
+    component = { Congress }
+    />
 
-      {/* 통계청 */}
+    { /* 통계청 */ }
 
-      <Route
-        exact
-        path="/classes/:classId/national-stats"
-        component={NationStats}
-      />
-      <Route
-        exact
-        path="/classes/:classId/set-up/stats"
-        component={SettingHw}
-      />
+    <
+    Route exact path = "/classes/:classId/national-stats"
+    component = { NationStats }
+    /> <
+    Route exact path = "/classes/:classId/set-up/stats"
+    component = { SettingHw }
+    />
 
-      <Route
-        exact
-        path="/classes/:classId/personal-stats"
-        component={MyStats}
-      />
-
-      {/* 테스트 */}
-      <Route exact path="/classes/:classId/test" component={ClassBasic} />
+    <
+    Route exact path = "/classes/:classId/personal-stats"
+    component = { MyStats }
+    />
 
 
-      {/* ***************  사법부  ************** */}
-      {/* 벌금 */}
-      <Route exact path="/classes/:classId/penalty" component={Penalty} />
+    { /* ***************  사법부  ************** */ } { /* 벌금 */ } <
+    Route exact path = "/classes/:classId/penalty"
+    component = { Penalty }
+    />
 
-      {/*신용등급 */}
-      <Route exact path="/classes/:classId/credit" component={Credit} />
+    { /*신용등급 */ } <
+    Route exact path = "/classes/:classId/credit"
+    component = { Credit }
+    />
 
-      {/* 시장 */}
+    { /* 시장 */ }
 
-      <Route exact path="/classes/:classId/market" component={Market} />
-      <Route
-        exact
-        path="/classes/:classId/market/marketproduct"
-        component={MarketProduct}
-      />
-      <Route
-        exact
-        path="/classes/:classId/real_estate_setting"
-        component={EstateSetting}
-      />
+    <
+    Route exact path = "/classes/:classId/market"
+    component = { Market }
+    /> <
+    Route exact path = "/classes/:classId/market/marketproduct"
+    component = { MarketProduct }
+    /> <
+    Route exact path = "/classes/:classId/real_estate_setting"
+    component = { EstateSetting }
+    />
 
-      {/* 그 외 */}
-      <Route path="/charts" component={Charts} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/charts" component={Charts} />
-      <Route path="*" component={NotFound} />
-    </Switch>
-  </BrowserRouter>
+    { /* 그 외 */ } <
+    Route path = "/charts"
+    component = { Charts }
+    /> <
+    Route path = "/dashboard"
+    component = { Dashboard }
+    /> <
+    Route path = "/charts"
+    component = { Charts }
+    /> <
+    Route path = "*"
+    component = { NotFound }
+    /> <
+    /Switch> <
+    /BrowserRouter>
 );
 
 export default Routes;
