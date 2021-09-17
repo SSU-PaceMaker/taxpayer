@@ -32,7 +32,7 @@
         "redux-persist": "^6.0.0",
         "redux-promise": "^0.6.0",
         "redux-thunk": "^2.3.0",
-        "set-value": "^3.0.1",
+        "set-value": "^4.0.1",
         "yup": "^0.32.9"
     },
     "scripts": {
